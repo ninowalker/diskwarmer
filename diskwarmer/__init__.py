@@ -42,7 +42,7 @@ def parse(file):
 from docopt import docopt
 usage = \
 """
-warm. Heats up files into the disk cache from previously
+diskwarmer. Heats up files into the disk cache from previously
       produced vmtouch -v report.
 
 Usage:
