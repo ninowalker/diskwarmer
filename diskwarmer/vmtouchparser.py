@@ -27,12 +27,14 @@ all_stats      = files_stat + dirs_stat + resident_stat + elapsed_stat
 
 vmtouch_parser = ZeroOrMore(record) + all_stats
 
-VmtouchRecord = namedtuple('VmtouchRecord', "name,pic,resident,size".split(','))
+VmtouchRecord = namedtuple('VmtouchRecord', "name,pic,resident,size,ratio".split(','))
 
 def parse(file):
     records = []
     def parseRecord(str, loc, toks):
-      record = VmtouchRecord(name=toks[0], pic=toks[3], resident=int(toks[5]), size=int(toks[7]))
+      parts = {'name':toks[0], 'pic':toks[3], 'resident':int(toks[5]), 'size':int(toks[7])}
+      parts['ratio'] = float(parts['resident'])/parts['size']
+      record = VmtouchRecord(**parts)
       records.append(record)
     record.setParseAction( parseRecord )
     vmtouch_parser.parseFile(file)
