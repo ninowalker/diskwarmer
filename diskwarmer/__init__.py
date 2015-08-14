@@ -14,11 +14,19 @@ Options:
   --version        Show version.
 """
 
+def sort_by_mapped_ratio(records):
+  return sorted(records, key=lambda x: x.ratio, reverse=True)
+
 def do_sort(path):
     records = parse(path)
-    density = [(float(x.resident)/x.size, x.name) for x in records]
-    for (x, name) in sorted(density, reverse=True):
-        print x, name
+    total_resident = reduce(lambda t,x: t+x.resident, records, 0)
+    total_size = reduce(lambda t,x: t+x.size, records, 0)
+    sum_resident = 0
+    sum_size = 0
+    for x in sort_by_mapped_ratio(records):
+        sum_resident += x.resident
+        sum_size += x.size
+        print '['+x.pic+']', sum_resident, sum_size, x.name
 
 def main():
     args = docopt(usage)
