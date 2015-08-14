@@ -26,7 +26,11 @@ def do_sort(path):
     for x in sort_by_mapped_ratio(records):
         sum_resident += x.resident
         sum_size += x.size
-        print '['+x.pic+']', sum_resident, sum_size, x.name
+        print "[{pic}] {resident_ratio:0.2f} {size_ratio:0.2f} {name}".format(
+            pic=x.pic,
+            resident_ratio=float(sum_resident)/total_resident,
+            size_ratio=float(sum_size)/total_size,
+            name=x.name)
 
 def main():
     args = docopt(usage)
