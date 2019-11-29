@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='diskwarmer',
-      version='1.0.0',
+      version='1.0.0a',
       description='Tool to help warm disk caches by targeting files which were memory resident in vmtouch reports.',
       url='http://github.com/andrewguy9/diskwarmer',
       author='Andrew Thomson',
