@@ -1,5 +1,6 @@
 from docopt import docopt
-from vmtouchparser import parse
+from .vmtouchparser import parse
+from functools import reduce
 
 usage = \
 """
@@ -28,13 +29,13 @@ def do_sort(path, limit):
         sum_size += x.size
         if limit is not None and sum_size > int(limit):
           return
-        print "[{pic}] {resident_ratio:0.2f} {size_ratio:0.2f} {sum_resident} {sum_size} {name}".format(
+        print("[{pic}] {resident_ratio:0.2f} {size_ratio:0.2f} {sum_resident} {sum_size} {name}".format(
             pic=x.pic,
             resident_ratio=float(sum_resident)/total_resident,
             size_ratio=float(sum_size)/total_size,
             sum_resident=sum_resident,
             sum_size=sum_size,
-            name=x.name)
+            name=x.name))
 
 
 def main():
